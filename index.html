@@ -11,6 +11,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
 <style>
+/* ============================================================
+   ПОДКЛЮЧЕНИЕ ШРИФТА TRY CLOTHER
+   ============================================================ */
+@font-face {
+  font-family: 'TRY Clother';
+  src: url('TRY-Clother-Bold.woff2') format('woff2'),
+       url('TRY-Clother-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root{
   --brand:#FE9200;
   --brand-soft:#FFF0DD;
@@ -43,7 +55,7 @@ html[data-theme="dark"]{
 html,body{margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Inter',system-ui,sans-serif;
+  font-family:'TRY Clother', 'Inter', system-ui, sans-serif;
   font-size:16px;line-height:1.55;color:var(--text);background:var(--bg);
   -webkit-font-smoothing:antialiased;
 }
@@ -55,7 +67,7 @@ img{max-width:100%;display:block}
 
 /* УТИЛИТЫ */
 .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-.section{padding:48px 0;border-top:1px solid var(--border)} /* Уменьшено с 72px для плотности */
+.section{padding:48px 0;border-top:1px solid var(--border)}
 .section--soft{background:var(--bg-soft)}
 .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px;flex-wrap:wrap}
 .section-head h2{font-size:32px;font-weight:700;margin:0;letter-spacing:-.015em;line-height:1.15}
@@ -190,8 +202,7 @@ html[data-theme="dark"] .status--planned{background:#3a2a10;color:#ffb066}
 
 /* КАРТА */
 .map-container{background:var(--bg-soft);border-radius:var(--radius-lg);padding:24px;border:1px solid var(--border);margin:24px 0 32px;display:flex;flex-direction:column;align-items:center;position:relative}
-.map-wrapper{position:relative;width:100%;max-width:850px;margin:0 auto;border-radius:var(--radius-md);overflow:hidden;background:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
-html[data-theme="dark"] .map-wrapper{background:#151515}
+.map-wrapper{position:relative;width:100%;max-width:850px;margin:0 auto;background:transparent;}
 .map-image{width:100%;height:auto;display:block}
 .district-selector{width:100%;max-width:850px;margin-top:20px;background:var(--bg);border-radius:var(--radius-md);border:1px solid var(--border);padding:16px}
 .district-selector h4{margin:0 0 12px;font-size:14px;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em}
@@ -213,6 +224,21 @@ html[data-theme="dark"] .map-wrapper{background:#151515}
 .map-info__row{display:flex;justify-content:space-between;padding:4px 0;font-size:14px;align-items:center;gap:12px}
 .map-info__meta{font-size:13px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
 .map-info__empty{color:var(--muted);font-size:14px;margin:0;text-align:center;padding-top:10px}
+
+/* Анимация стрелок прогноза */
+.arrow-group-vas {
+  transform-origin: 595px 423px;
+  animation: pulseArrows 2s ease-in-out infinite alternate;
+}
+.arrow-group-krasn {
+  transform-origin: 528px 661px;
+  animation: pulseArrows 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseArrows {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.04); }
+}
 
 /* СТАТЬИ */
 .article{padding:56px 0}
@@ -289,7 +315,7 @@ html[data-theme="dark"] .footer{background:#0a0a0a}
 /* PRINT STYLES */
 @media print {
   .header, .footer, .topbar, .map-container, .filters, .search-bar, .btn, .nav, .icon-btn, .lang-select { display: none !important; }
-  body { background: #fff !important; color: #000 !important; }
+  body { background: #fff !important; color: #000 !important; font-family: 'TRY Clother', 'Inter', sans-serif !important; }
   .article { padding: 0 !important; }
   .container { max-width: 100% !important; margin: 0 !important; padding: 0 !important; }
   .bar-row__fill { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -352,7 +378,7 @@ html[data-theme="dark"] .footer{background:#0a0a0a}
   <div class="container">
     <div class="topbar__meta"><span data-i18n="topbar.org">Санкт-Петербургский центр рейтингов и общественного мнения</span></div>
     <div class="topbar__meta">
-      <a href="#/ratings/rating-parties-2026" class="topbar__new" data-i18n="topbar.new">● Новое: партийные рейтинги</a>
+      <a href="#/forecast" class="topbar__new" data-i18n="topbar.new">● Новое: прогноз электоральных потоков</a>
       <a href="#/methodology" data-i18n="nav.methodology">Методология</a>
     </div>
   </div>
@@ -368,6 +394,7 @@ html[data-theme="dark"] .footer{background:#0a0a0a}
       <a href="#/" data-route="/" data-i18n="nav.home">Главная</a>
       <a href="#/research" data-route="/research" data-i18n="nav.research">Исследования</a>
       <a href="#/ratings" data-route="/ratings" data-i18n="nav.ratings">Рейтинги</a>
+      <a href="#/forecast" data-route="/forecast" data-i18n="nav.forecast">Прогноз</a>
       <a href="#/analytics" data-route="/analytics" data-i18n="nav.analytics">Аналитика</a>
       <a href="#/press" data-route="/press" data-i18n="nav.press">Для СМИ</a>
       <a href="#/methodology" data-route="/methodology" data-i18n="nav.methodology">Методология</a>
@@ -408,6 +435,7 @@ html[data-theme="dark"] .footer{background:#0a0a0a}
         <ul>
           <li><a href="#/research" data-i18n="nav.research">Исследования</a></li>
           <li><a href="#/ratings" data-i18n="nav.ratings">Рейтинги</a></li>
+          <li><a href="#/forecast" data-i18n="nav.forecast">Прогноз</a></li>
           <li><a href="#/analytics" data-i18n="nav.analytics">Аналитика</a></li>
           <li><a href="#/methodology" data-i18n="nav.methodology">Методология</a></li>
         </ul>
@@ -443,11 +471,11 @@ html[data-theme="dark"] .footer{background:#0a0a0a}
    ============================================================ */
 const TRANSLATIONS = {
   ru: {
-    "nav.home": "Главная", "nav.research": "Исследования", "nav.ratings": "Рейтинги",
+    "nav.home": "Главная", "nav.research": "Исследования", "nav.ratings": "Рейтинги", "nav.forecast": "Прогноз",
     "nav.analytics": "Аналитика", "nav.press": "Для СМИ", "nav.methodology": "Методология", "nav.about": "О центре",
     "nav.contacts": "Контакты",
     "topbar.org": "Санкт-Петербургский центр рейтингов и общественного мнения",
-    "topbar.new": "● Новое: партийные рейтинги",
+    "topbar.new": "● Новое: прогноз электоральных потоков",
     "footer.desc": "Санкт-Петербургский центр рейтингов и общественного мнения. Изучаем общественные настроения, электоральные предпочтения и городские проблемы.",
     "footer.sections": "Разделы", "footer.about": "О центре", "footer.org": "Об организации",
     "footer.independence": "Независимость", "footer.privacy": "Обработка данных",
@@ -470,14 +498,31 @@ const TRANSLATIONS = {
     "about.maps.lead": "У центра есть головной офис и четыре региональных отделения. Нажмите на маркер на карте, чтобы увидеть адрес и связаться с нужным отделением.",
     "press.title": "Пресс-центр", "press.lead": "Официальные пресс-релизы, комментарии и материалы для СМИ.",
     "press.read": "Читать полностью", "press.download": "Скачать PDF",
-    "rating.dynamics": "Динамика рейтинга", "rating.current": "Текущий срез"
+    "rating.dynamics": "Динамика рейтинга", "rating.current": "Текущий срез",
+    "forecast.title": "Электоральные потоки", "forecast.lead": "Визуализация прогноза изменения общественного мнения на основе октябрьских замеров. Зеленые стрелки показывают <strong>возможное</strong> направление роста поддержки партии «Яблоко», <strong>которое предполагает СПЦРОМ</strong>.",
+    "forecast.vas.title": "Василеостровский район", "forecast.vas.desc": "На карте видно, как электоральная активность «Яблока» смещается в сторону Василеостровского района. Это связано с <span class='mark'>демографическими сдвигами</span> и высокой концентрацией студенческой аудитории.",
+    "forecast.krasn.title": "Красносельский район", "forecast.krasn.desc": "В Красносельском районе прогнозируется устойчивый приток сторонников. Вектор поддержки идет от Кировского района, где «Яблоко» имеет сильные позиции.",
+    "forecast.summary": "Краткие выводы", "forecast.growth": "Прогнозируемый рост", "forecast.factor": "Ключевой фактор",
+    "forecast.vas.factor": "Голоса неопределившихся из смежных районов", "forecast.krasn.factor": "Эффект соседства и активная работа с местными сообществами",
+    "forecast.note": "Методологическая справка: Визуализация потоков отражает <strong>возможное</strong> направление изменения электоральных предпочтений между августовским и октябрьским замерами. Интенсивность линий указывает на <strong>предполагаемый</strong> приток голосов. Данные являются сценарными, <strong>основаны на предположениях СПЦРОМ</strong> и не предсказывают окончательный результат выборов.",
+    "forecast.table.title": "Таблица прогнозируемого роста",
+    "forecast.table.district": "Район",
+    "forecast.table.current": "Текущая поддержка",
+    "forecast.table.forecast": "Прогноз",
+    "forecast.table.delta": "Дельта",
+    "forecast.analytics.title": "Аналитический комментарий",
+    "forecast.analytics.text1": "Анализируя карту электоральных потоков, можно выделить несколько ключевых трендов, которые будут определять политический ландшафт Санкт-Петербурга в ближайшие месяцы.",
+    "forecast.analytics.text2": "Во-первых, наблюдается устойчивая тенденция к консолидации электората вокруг партии «Яблоко». Это связано не только с присоединением Демократической партии, но и с общим запросом на альтернативу. Зеленые стрелки, идущие из разных районов города, символизируют этот процесс.",
+    "forecast.analytics.text3": "Во-вторых, Красносельский район становится новой точкой притяжения. Если раньше этот район считался вотчиной других сил, то сейчас мы видим, как активная работа с местными сообществами приносит свои плоды. Прогноз показывает рост поддержки на 2-3% в зависимости от сценария.",
+    "forecast.analytics.text4": "Мы продолжим мониторинг этих потоков. Следующий замер покажет, удастся ли партии «Яблоко» удержать и приумножить свое влияние в этих районах.",
+    "director.name": "Алегра Григорий Сергеевич", "director.role": "Директор СПЦРОМ", "director.bio1": "Основатель и руководитель Санкт-Петербургского центра рейтингов и общественного мнения. Специализируется на электоральной географии, анализе больших данных и политической социологии.", "director.bio2": "Под его руководством центр внедрил стандарты открытых данных и запустил первую интерактивную карту электоральных предпочтений города.", "director.quote": "«Наша задача — не просто собирать цифры, а превращать их в понятную картину общественных настроений. Прозрачность и честность в методологии — наш главный актив»."
   },
   en: {
-    "nav.home": "Home", "nav.research": "Research", "nav.ratings": "Ratings",
+    "nav.home": "Home", "nav.research": "Research", "nav.ratings": "Ratings", "nav.forecast": "Forecast",
     "nav.analytics": "Analytics", "nav.press": "For Media", "nav.methodology": "Methodology", "nav.about": "About Us",
     "nav.contacts": "Contacts",
     "topbar.org": "St. Petersburg Center for Ratings and Public Opinion",
-    "topbar.new": "● New: party ratings",
+    "topbar.new": "● New: electoral flow forecast",
     "footer.desc": "St. Petersburg Center for Ratings and Public Opinion. We study public sentiment, electoral preferences, and urban issues.",
     "footer.sections": "Sections", "footer.about": "About", "footer.org": "About organization",
     "footer.independence": "Independence", "footer.privacy": "Data processing",
@@ -500,14 +545,31 @@ const TRANSLATIONS = {
     "about.maps.lead": "The center has a head office and four regional branches. Click on a marker on the map to see the address and contact the desired branch.",
     "press.title": "Press Center", "press.lead": "Official press releases, comments, and materials for media.",
     "press.read": "Read more", "press.download": "Download PDF",
-    "rating.dynamics": "Rating Dynamics", "rating.current": "Current Snapshot"
+    "rating.dynamics": "Rating Dynamics", "rating.current": "Current Snapshot",
+    "forecast.title": "Electoral Flows", "forecast.lead": "Visualization of public opinion shift forecast based on October polls. Green arrows show the <strong>possible</strong> direction of Yabloko party support growth, <strong>assumed by SPCROM</strong>.",
+    "forecast.vas.title": "Vasileostrovsky District", "forecast.vas.desc": "The map shows how Yabloko's electoral activity is shifting towards the Vasileostrovsky district. This is due to <span class='mark'>demographic shifts</span> and a high concentration of student audience.",
+    "forecast.krasn.title": "Krasnoselsky District", "forecast.krasn.desc": "A steady influx of supporters is predicted in the Krasnoselsky district. The support vector comes from the Kirovsky district, where Yabloko has strong positions.",
+    "forecast.summary": "Brief Summary", "forecast.growth": "Projected Growth", "forecast.factor": "Key Factor",
+    "forecast.vas.factor": "Undecided votes from adjacent districts", "forecast.krasn.factor": "Neighborhood effect and active work with local communities",
+    "forecast.note": "Methodological note: The visualization reflects the <strong>possible</strong> direction of change in electoral preferences between the August and October polls. The intensity of the lines indicates the <strong>assumed</strong> influx of votes. The data is scenario-based, <strong>based on SPCROM assumptions</strong>, and does not predict the final election result.",
+    "forecast.table.title": "Projected Growth Table",
+    "forecast.table.district": "District",
+    "forecast.table.current": "Current Support",
+    "forecast.table.forecast": "Forecast",
+    "forecast.table.delta": "Delta",
+    "forecast.analytics.title": "Analytical Commentary",
+    "forecast.analytics.text1": "Analyzing the electoral flow map, several key trends can be identified that will determine the political landscape of St. Petersburg in the coming months.",
+    "forecast.analytics.text2": "Firstly, there is a steady trend towards consolidation of the electorate around the Yabloko party. This is due not only to the merger with the Democratic Party but also to a general demand for an alternative. The green arrows coming from different districts of the city symbolize this process.",
+    "forecast.analytics.text3": "Secondly, the Krasnoselsky district is becoming a new point of attraction. If earlier this district was considered a stronghold of other forces, now we see how active work with local communities is bearing fruit. The forecast shows support growth of 2-3% depending on the scenario.",
+    "forecast.analytics.text4": "We will continue to monitor these flows. The next poll will show whether the Yabloko party will be able to maintain and increase its influence in these districts.",
+    "director.name": "Alegra Grigory Sergeevich", "director.role": "Director of SPCROM", "director.bio1": "Founder and head of the St. Petersburg Center for Ratings and Public Opinion. Specializes in electoral geography, big data analysis, and political sociology.", "director.bio2": "Under his leadership, the center implemented open data standards and launched the first interactive map of the city's electoral preferences.", "director.quote": "\"Our task is not just to collect numbers, but to turn them into a clear picture of public sentiment. Transparency and honesty in methodology are our main assets.\""
   },
   zh: {
-    "nav.home": "首页", "nav.research": "研究", "nav.ratings": "评级",
+    "nav.home": "首页", "nav.research": "研究", "nav.ratings": "评级", "nav.forecast": "预测",
     "nav.analytics": "分析", "nav.press": "媒体", "nav.methodology": "方法论", "nav.about": "关于我们",
     "nav.contacts": "联系我们",
     "topbar.org": "圣彼得堡评级与舆情中心",
-    "topbar.new": "● 新：政党评级",
+    "topbar.new": "● 新：选举流向预测",
     "footer.desc": "圣彼得堡评级与舆情中心。我们研究公众情绪、选举偏好和城市问题。",
     "footer.sections": "栏目", "footer.about": "关于", "footer.org": "关于组织",
     "footer.independence": "独立性", "footer.privacy": "数据处理",
@@ -530,7 +592,24 @@ const TRANSLATIONS = {
     "about.maps.lead": "中心设有总部和四个地区分支机构。点击地图上的标记查看地址并联系所需分支。",
     "press.title": "新闻中心", "press.lead": "官方新闻稿、评论和媒体材料。",
     "press.read": "阅读全文", "press.download": "下载PDF",
-    "rating.dynamics": "评级动态", "rating.current": "当前概况"
+    "rating.dynamics": "评级动态", "rating.current": "当前概况",
+    "forecast.title": "选举流向", "forecast.lead": "基于十月民调的公众舆论转变预测可视化。绿色箭头显示亚博卢党支持率增长的<strong>可能</strong>方向，这是<strong>SPCROM的假设</strong>。",
+    "forecast.vas.title": "瓦西里岛区", "forecast.vas.desc": "地图显示亚博卢的选举活动正在向瓦西里岛区转移。这是由于<span class='mark'>人口结构变化</span>和学生群体的高度集中。",
+    "forecast.krasn.title": "红村区", "forecast.krasn.desc": "红村区预计会有稳定的支持者涌入。支持向量来自基洛夫区，亚博卢在那里拥有强势地位。",
+    "forecast.summary": "简要总结", "forecast.growth": "预计增长", "forecast.factor": "关键因素",
+    "forecast.vas.factor": "来自邻近地区的未决定选票", "forecast.krasn.factor": "邻里效应和与当地社区的积极合作",
+    "forecast.note": "方法论说明：可视化反映了八月和十月民调之间选举偏好变化的<strong>可能</strong>方向。线条的强度表示<strong>假设的</strong>选票流入。数据基于情景，<strong>基于SPCROM的假设</strong>，并不预测最终选举结果。",
+    "forecast.table.title": "预测增长表",
+    "forecast.table.district": "地区",
+    "forecast.table.current": "当前支持率",
+    "forecast.table.forecast": "预测",
+    "forecast.table.delta": "差值",
+    "forecast.analytics.title": "分析评论",
+    "forecast.analytics.text1": "通过分析选举流向图，可以确定未来几个月将决定圣彼得堡政治格局的几个关键趋势。",
+    "forecast.analytics.text2": "首先，选民围绕亚博卢党进行整合的趋势稳定。这不仅是因为与民主党的合并，还因为普遍寻求替代方案的需求。来自城市不同地区的绿色箭头象征着这一过程。",
+    "forecast.analytics.text3": "其次，红村区正在成为新的吸引力中心。如果说以前该区被认为是其他势力的据点，那么现在我们看到，与当地社区的积极合作正在取得成果。预测显示，根据情景不同，支持率将增长2-3%。",
+    "forecast.analytics.text4": "我们将继续监测这些流向。下一次民调将显示亚博卢党是否能够保持并增加其在这些地区的影响力。",
+    "director.name": "阿莱格拉·格里戈里·谢尔盖耶维奇", "director.role": "SPCROM 主任", "director.bio1": "圣彼得堡评级与舆情中心的创始人和负责人。专攻选举地理学、大数据分析和政治社会学。", "director.bio2": "在他的领导下，该中心实施了开放数据标准，并推出了该市首个选举偏好互动地图。", "director.quote": "“我们的任务不仅是收集数字，而是将其转化为公众情绪的清晰画面。方法论的透明度和诚实度是我们最重要的资产。”"
   }
 };
 
@@ -586,7 +665,8 @@ const ICONS = {
   download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
   mail: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
   award: '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
-  briefcase: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>'
+  briefcase: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>',
+  trend: '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>'
 };
 function icon(name, size=20){
   return `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:${size}px;height:${size}px" aria-hidden="true">${ICONS[name]||''}</svg>`;
@@ -629,25 +709,25 @@ const DATA = {
   ],
   research: [
     {
-      id: "party-support-oct-2026",
-      title: {ru:"Электоральные предпочтения: поддержка политических партий", en:"Electoral Preferences: Party Support", zh:"选举偏好：政党支持率"},
-      dateStart: "01.10.2026", dateEnd: "15.10.2026", datePub: "27.10.2026",
-      category: {ru:"Партийные рейтинги", en:"Party ratings", zh:"政党评级"},
-      status: "published", statusLabel: {ru:"Опубликовано", en:"Published", zh:"已发布"}, statusClass: "status--done",
-      lead: {ru:"Изучение электоральных предпочтений жителей Санкт-Петербурга: распределение поддержки между партиями «Яблоко» и «Голос молодёжи» по районам города.", en:"Study of electoral preferences of St. Petersburg residents: distribution of support between Yabloko and Youth Voice by city districts.", zh:"研究圣彼得堡居民的选举偏好：亚博卢和青年之声在各区的支持率分布。"},
-      goal: {ru:"Оценить распределение электоральных предпочтений между двумя основными политическими силами и выявить географические особенности поддержки.", en:"Assess the distribution of electoral preferences between the two main political forces and identify geographical features of support.", zh:"评估两大政治力量之间的选举偏好分布，并确定支持率的地理特征。"},
-      method: {ru:"Онлайн-анкета, добровольное участие, распространение через официальные каналы центра и Discord-сервер.", en:"Online survey, voluntary participation, distribution through official channels and Discord server.", zh:"在线问卷，自愿参与，通过官方渠道和Discord服务器分发。"},
-      sample: {ru:"Взрослые жители Санкт-Петербурга, самостоятельно заполнившие анкету.", en:"Adult residents of St. Petersburg who filled out the questionnaire.", zh:"填写问卷的圣彼得堡成年居民。"},
-      participants: 510000,
-      question: {ru:"За какую из партий вы бы проголосовали, если бы выборы проходили в ближайшее воскресенье?", en:"Which party would you vote for if the elections were held next Sunday?", zh:"如果下周日举行选举，您会投票给哪个政党？"},
-      calc: {ru:"Проценты рассчитаны от числа ответивших на вопрос. Итоговые доли округлены до десятых.", en:"Percentages are calculated from the number of respondents. Final shares are rounded to tenths.", zh:"百分比根据受访者人数计算。最终份额四舍五入到十分位。"},
-      limits: {ru:"Добровольная онлайн-выборка не является репрезентативной для всего населения города. Показатели по отдельным районам основаны на небольших подвыборках.", en:"The voluntary online sample is not representative of the entire city population. District indicators are based on small subsamples.", zh:"自愿在线样本不能代表全市人口。各区指标基于小规模子样本。"},
-      formLink: null
+      id: "governor-trust-nov-2026",
+      title: {ru:"Доверие губернатору и оценка деятельности городских властей", en:"Trust in the Governor and Assessment of City Authorities", zh:"对州长的信任和对市当局的评估"},
+      dateStart: "05.11.2026", dateEnd: "08.11.2026", datePub: null,
+      category: {ru:"Доверие губернатору", en:"Trust in governor", zh:"对州长的信任"},
+      status: "open", statusLabel: {ru:"Приём ответов", en:"Accepting responses", zh:"正在收集回复"}, statusClass: "status--open",
+      lead: {ru:"Оценка уровня доверия губернатору Санкт-Петербурга и работы городских органов власти.", en:"Assessment of the level of trust in the Governor of St. Petersburg and the work of city authorities.", zh:"评估对圣彼得堡州长和市当局工作的信任程度。"},
+      goal: {ru:"Оценить уровень доверия к институтам городской власти и выявить динамику.", en:"Assess the level of trust in city government institutions and identify dynamics.", zh:"评估对市政府机构的信任程度并确定动态。"},
+      method: {ru:"Онлайн-анкета, добровольное участие.", en:"Online survey, voluntary participation.", zh:"在线问卷，自愿参与。"},
+      sample: {ru:"Взрослые жители Санкт-Петербурга.", en:"Adult residents of St. Petersburg.", zh:"圣彼得堡成年居民。"},
+      participants: 0,
+      question: {ru:"Насколько вы доверяете губернатору Санкт-Петербурга?", en:"How much do you trust the Governor of St. Petersburg?", zh:"您对圣彼得堡州长的信任度如何？"},
+      calc: {ru:"Будет рассчитано после закрытия опроса.", en:"Will be calculated after the survey closes.", zh:"将在调查结束后计算。"},
+      limits: {ru:"Данные ещё не собраны.", en:"Data has not yet been collected.", zh:"数据尚未收集。"},
+      formLink: "https://docs.google.com/forms/d/e/1FAIpQLSdJrTQiI9E2513AYL7cjnMMdgp4JxhMVCYsNRu7fe87jhUPoQ/formResponse"
     },
     {
       id: "city-problems-nov-2026",
       title: {ru:"Актуальные городские проблемы глазами жителей", en:"Current Urban Problems Through the Eyes of Residents", zh:"居民眼中的当前城市问题"},
-      dateStart: "30.10.2026", dateEnd: "02.11.2026", datePub: null,
+      dateStart: "10.11.2026", dateEnd: "15.11.2026", datePub: null,
       category: {ru:"Городская среда", en:"Urban environment", zh:"城市环境"},
       status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
       lead: {ru:"Исследование того, какие городские проблемы жители Санкт-Петербурга считают наиболее острыми.", en:"Research on which urban problems St. Petersburg residents consider the most acute.", zh:"研究圣彼得堡居民认为最尖锐的城市问题。"},
@@ -661,25 +741,9 @@ const DATA = {
       formLink: null
     },
     {
-      id: "governor-trust-nov-2026",
-      title: {ru:"Доверие губернатору и оценка деятельности городских властей", en:"Trust in the Governor and Assessment of City Authorities", zh:"对州长的信任和对市当局的评估"},
-      dateStart: "01.11.2026", dateEnd: "04.11.2026", datePub: null,
-      category: {ru:"Доверие губернатору", en:"Trust in governor", zh:"对州长的信任"},
-      status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
-      lead: {ru:"Оценка уровня доверия губернатору Санкт-Петербурга и работы городских органов власти.", en:"Assessment of the level of trust in the Governor of St. Petersburg and the work of city authorities.", zh:"评估对圣彼得堡州长和市当局工作的信任程度。"},
-      goal: {ru:"Оценить уровень доверия к институтам городской власти и выявить динамику.", en:"Assess the level of trust in city government institutions and identify dynamics.", zh:"评估对市政府机构的信任程度并确定动态。"},
-      method: {ru:"Онлайн-анкета, добровольное участие.", en:"Online survey, voluntary participation.", zh:"在线问卷，自愿参与。"},
-      sample: {ru:"Взрослые жители Санкт-Петербурга.", en:"Adult residents of St. Petersburg.", zh:"圣彼得堡成年居民。"},
-      participants: 0,
-      question: {ru:"Насколько вы доверяете губернатору Санкт-Петербурга?", en:"How much do you trust the Governor of St. Petersburg?", zh:"您对圣彼得堡州长的信任度如何？"},
-      calc: {ru:"Будет рассчитано после закрытия опроса.", en:"Will be calculated after the survey closes.", zh:"将在调查结束后计算。"},
-      limits: {ru:"Данные ещё не собраны.", en:"Data has not yet been collected.", zh:"数据尚未收集。"},
-      formLink: null
-    },
-    {
       id: "transport-nov-2026",
       title: {ru:"Удовлетворённость работой городского транспорта", en:"Satisfaction with Urban Transport", zh:"对城市交通的满意度"},
-      dateStart: "03.11.2026", dateEnd: "06.11.2026", datePub: null,
+      dateStart: "12.11.2026", dateEnd: "17.11.2026", datePub: null,
       category: {ru:"Социально-экономические вопросы", en:"Socio-economic issues", zh:"社会经济问题"},
       status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
       lead: {ru:"Оценка удовлетворённости жителей работой городского общественного транспорта.", en:"Assessment of residents' satisfaction with public transport.", zh:"评估居民对公共交通的满意度。"},
@@ -695,7 +759,7 @@ const DATA = {
     {
       id: "social-economic-nov-2026",
       title: {ru:"Социально-экономические настроения жителей", en:"Socio-Economic Sentiments of Residents", zh:"居民的社会经济情绪"},
-      dateStart: "05.11.2026", dateEnd: "08.11.2026", datePub: null,
+      dateStart: "18.11.2026", dateEnd: "23.11.2026", datePub: null,
       category: {ru:"Общественные настроения", en:"Public sentiment", zh:"公众情绪"},
       status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
       lead: {ru:"Изучение восприятия экономической ситуации и личных ожиданий жителей.", en:"Study of the perception of the economic situation and personal expectations of residents.", zh:"研究居民对经济形势和个人期望的看法。"},
@@ -704,6 +768,54 @@ const DATA = {
       sample: {ru:"Взрослые жители Санкт-Петербурга.", en:"Adult residents of St. Petersburg.", zh:"圣彼得堡成年居民。"},
       participants: 0,
       question: {ru:"Как вы оцениваете текущую экономическую ситуацию?", en:"How do you assess the current economic situation?", zh:"您如何评估当前的经济形势？"},
+      calc: {ru:"Будет рассчитано после закрытия опроса.", en:"Will be calculated after the survey closes.", zh:"将在调查结束后计算。"},
+      limits: {ru:"Данные ещё не собраны.", en:"Data has not yet been collected.", zh:"数据尚未收集。"},
+      formLink: null
+    },
+    {
+      id: "party-support-nov-2026",
+      title: {ru:"Электоральные предпочтения и партийные рейтинги", en:"Electoral Preferences and Party Ratings", zh:"选举偏好与政党评级"},
+      dateStart: "20.11.2026", dateEnd: "25.11.2026", datePub: null,
+      category: {ru:"Партийные рейтинги", en:"Party ratings", zh:"政党评级"},
+      status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
+      lead: {ru:"Измерение текущего уровня поддержки политических партий и электоральных настроений.", en:"Measuring the current level of support for political parties and electoral sentiments.", zh:"衡量当前政党支持率和选举情绪水平。"},
+      goal: {ru:"Оценить динамику партийных предпочтений.", en:"Assess the dynamics of party preferences.", zh:"评估政党偏好的动态。"},
+      method: {ru:"Онлайн-анкета, добровольное участие.", en:"Online survey, voluntary participation.", zh:"在线问卷，自愿参与。"},
+      sample: {ru:"Взрослые жители Санкт-Петербурга.", en:"Adult residents of St. Petersburg.", zh:"圣彼得堡成年居民。"},
+      participants: 0,
+      question: {ru:"За какую партию вы бы проголосовали?", en:"Which party would you vote for?", zh:"您会投票给哪个政党？"},
+      calc: {ru:"Будет рассчитано после закрытия опроса.", en:"Will be calculated after the survey closes.", zh:"将在调查结束后计算。"},
+      limits: {ru:"Данные ещё не собраны.", en:"Data has not yet been collected.", zh:"数据尚未收集。"},
+      formLink: null
+    },
+    {
+      id: "district-admin-nov-2026",
+      title: {ru:"Оценка работы районных администраций", en:"Assessment of District Administrations", zh:"对区行政部门的评估"},
+      dateStart: "25.11.2026", dateEnd: "30.11.2026", datePub: null,
+      category: {ru:"Оценка деятельности органов власти", en:"Assessment of authorities", zh:"对当局的评估"},
+      status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
+      lead: {ru:"Оценка эффективности работы районных администраций по мнению жителей.", en:"Assessment of the effectiveness of district administrations according to residents.", zh:"根据居民评估区行政部门的效率。"},
+      goal: {ru:"Выявить уровень удовлетворённости работой местных властей.", en:"Identify the level of satisfaction with the work of local authorities.", zh:"确定对地方当局工作的满意度。"},
+      method: {ru:"Онлайн-анкета, добровольное участие.", en:"Online survey, voluntary participation.", zh:"在线问卷，自愿参与。"},
+      sample: {ru:"Жители Санкт-Петербурга.", en:"Residents of St. Petersburg.", zh:"圣彼得堡居民。"},
+      participants: 0,
+      question: {ru:"Как вы оцениваете работу вашей районной администрации?", en:"How do you assess the work of your district administration?", zh:"您如何评估您所在区行政部门的工作？"},
+      calc: {ru:"Будет рассчитано после закрытия опроса.", en:"Will be calculated after the survey closes.", zh:"将在调查结束后计算。"},
+      limits: {ru:"Данные ещё не собраны.", en:"Data has not yet been collected.", zh:"数据尚未收集。"},
+      formLink: null
+    },
+    {
+      id: "year-results-nov-2026",
+      title: {ru:"Итоговое исследование года: общественные настроения", en:"Year-End Study: Public Sentiment", zh:"年终研究：公众情绪"},
+      dateStart: "28.11.2026", dateEnd: "01.12.2026", datePub: null,
+      category: {ru:"Общественные настроения", en:"Public sentiment", zh:"公众情绪"},
+      status: "planned", statusLabel: {ru:"Скоро стартует", en:"Coming soon", zh:"即将开始"}, statusClass: "status--planned",
+      lead: {ru:"Комплексное исследование итогов года и ожиданий жителей на будущее.", en:"Comprehensive study of the year's results and residents' expectations for the future.", zh:"对年度成果和居民未来期望的综合研究。"},
+      goal: {ru:"Подвести итоги года и выявить ключевые тренды общественного мнения.", en:"Summarize the year's results and identify key public opinion trends.", zh:"总结年度成果并确定公众舆论的主要趋势。"},
+      method: {ru:"Онлайн-анкета, добровольное участие.", en:"Online survey, voluntary participation.", zh:"在线问卷，自愿参与。"},
+      sample: {ru:"Взрослые жители Санкт-Петербурга.", en:"Adult residents of St. Petersburg.", zh:"圣彼得堡成年居民。"},
+      participants: 0,
+      question: {ru:"Как вы оцениваете итоги года для города?", en:"How do you assess the year's results for the city?", zh:"您如何评估该市今年的成果？"},
       calc: {ru:"Будет рассчитано после закрытия опроса.", en:"Will be calculated after the survey closes.", zh:"将在调查结束后计算。"},
       limits: {ru:"Данные ещё не собраны.", en:"Data has not yet been collected.", zh:"数据尚未收集。"},
       formLink: null
@@ -747,68 +859,37 @@ const DATA = {
   ],
   press: [
     {
-      id: "press-1",
-      title: {ru:"СПЦРОМ представляет электоральную карту Санкт-Петербурга", en:"SPCROM presents the electoral map of St. Petersburg", zh:"SPCROM 展示圣彼得堡选举地图"},
-      date: "27.10.2026",
-      lead: {ru:"Центр впервые публикует интерактивную карту поддержки политических партий по всем 18 районам города.", en:"The center for the first time publishes an interactive map of political party support for all 18 districts of the city.", zh:"该中心首次发布全市18个区政党支持率的互动地图。"},
-      body: {
-        ru: "<p>Санкт-Петербургский центр рейтингов и общественного мнения (СПЦРОМ) представляет результаты октябрьского исследования. <span class='mark'>Впервые в открытом доступе публикуется электоральная карта города с разбивкой по всем 18 районам.</span></p><p>По данным исследования, «Яблоко» набирает 81.8% поддержки, «Голос молодёжи» — 9.1%. Ещё 9.1% респондентов не определились с выбором. Наибольший отрыв «Яблока» зафиксирован в Кронштадтском (92%) и Петродворцовом (90%) районах. Наибольшая поддержка «Голоса молодёжи» — в Невском (22%) и Московском (20%) районах.</p><p>«Мы стремимся к максимальной прозрачности. <span class='mark'>Каждый житель города может найти свой район на карте и увидеть реальные цифры</span>», — отмечают в пресс-службе центра.</p>",
-        en: "<p>The St. Petersburg Center for Ratings and Public Opinion (SPCROM) presents the results of the October study. <span class='mark'>For the first time, the city's electoral map is published in the public domain, broken down by all 18 districts.</span></p><p>According to the study, Yabloko gains 81.8% support, Youth Voice — 9.1%. Another 9.1% of respondents are undecided. The largest gap for Yabloko was recorded in Kronshtadtsky (92%) and Petrodvortsovy (90%) districts. The highest support for Youth Voice is in Nevsky (22%) and Moskovsky (20%) districts.</p><p>\"We strive for maximum transparency. <span class='mark'>Every city resident can find their district on the map and see the real numbers</span>,\" the center's press service notes.</p>",
-        zh: "<p>圣彼得堡评级与舆情中心（SPCROM）公布了十月研究的结果。<span class='mark'>这是该市选举地图首次向公众发布，包含所有18个区的详细数据。</span></p><p>根据研究，亚博卢获得81.8%的支持率，青年之声获得9.1%。另有9.1%的受访者未决定。亚博卢的最大差距出现在喀琅施塔得区（92%）和彼得宫区（90%）。青年之声的最高支持率出现在涅瓦区（22%）和莫斯科区（20%）。</p><p>“我们力求最大程度的透明度。<span class='mark'>每位市民都可以在地图上找到自己的区并看到真实的数字</span>，”该中心新闻处指出。</p>"
-      }
-    },
-    {
-      id: "press-2",
-      title: {ru:"Новые исследования: ноябрьский цикл опросов", en:"New Research: November Survey Cycle", zh:"新研究：十一月调查周期"},
-      date: "28.10.2026",
-      lead: {ru:"Анонс четырех новых исследований, которые стартуют в конце октября и начале ноября.", en:"Announcement of four new studies starting in late October and early November.", zh:"宣布将于十月底和十一月初启动的四项新研究。"},
-      body: {
-        ru: "<p>СПЦРОМ анонсирует серию новых исследований, посвященных актуальным городским проблемам. <span class='mark'>Опросы будут проходить с 30 октября по 8 ноября.</span></p><p>В рамках цикла будут изучены: городская среда, доверие губернатору, удовлетворенность транспортом и социально-экономические настроения жителей. Участие в опросах добровольное и анонимное. Следите за анонсами на нашем Discord-сервере.</p>",
-        en: "<p>SPCROM announces a series of new studies dedicated to current urban problems. <span class='mark'>Surveys will be conducted from October 30 to November 8.</span></p><p>The cycle will study: the urban environment, trust in the governor, satisfaction with transport, and socio-economic sentiments of residents. Participation in surveys is voluntary and anonymous. Follow the announcements on our Discord server.</p>",
-        zh: "<p>SPCROM宣布了一系列致力于当前城市问题的新研究。<span class='mark'>调查将于10月30日至11月8日进行。</span></p><p>该周期将研究：城市环境、对州长的信任、对交通的满意度以及居民的社会经济情绪。参与调查是自愿和匿名的。请在我们的Discord服务器上关注公告。</p>"
-      }
-    },
-    {
-      id: "press-3",
-      title: {ru:"СПЦРОМ публикует результаты экспресс-опроса об электоральных предпочтениях", en:"SPCROM publishes express poll results on electoral preferences", zh:"SPCROM 公布关于选举偏好的快速民意调查结果"},
-      date: "30.10.2026",
-      lead: {ru:"Публикуем результаты опроса о партийных предпочтениях и ключевых проблемах Санкт-Петербурга.", en:"We publish the results of a survey on party preferences and key problems of St. Petersburg.", zh:"我们公布关于政党偏好和圣彼得堡关键问题的调查结果。"},
+      id: "press-governor-start",
+      title: {ru:"СПЦРОМ запускает опрос о доверии губернатору и оценке городских властей", en:"SPCROM launches a poll on trust in the governor and assessment of city authorities", zh:"SPCROM 启动关于州长信任度和市当局评估的调查"},
+      date: "05.11.2026",
+      lead: {ru:"Приглашаем жителей Санкт-Петербурга принять участие в новом исследовании, посвященном оценке работы городской администрации.", en:"We invite St. Petersburg residents to take part in a new study dedicated to assessing the work of the city administration.", zh:"我们邀请圣彼得堡居民参与一项关于评估市行政部门工作的新研究。"},
       body: {
         ru: `
-          <p>Публикуем результаты экспресс-опроса, посвященного электоральным предпочтениям жителей Санкт-Петербурга и ключевым городским проблемам. В опросе приняли участие <span class="mark">510 тыс. респондентов</span>. Из-за малого размера выборки данные носят иллюстративный характер, однако позволяют выявить определенные тенденции.</p>
-          <h2>Электоральные предпочтения</h2>
-          <p>По результатам опроса, абсолютным лидером является партия <span class="mark">«Яблоко» — 81.8%</span>. Партия «Голос молодёжи» набирает 9.1%. Еще 9.1% респондентов заявили, что не намерены голосовать. При этом 72.7% участников (54.5% «обязательно» и 18.2% «скорее да») планируют принять участие в выборах в Законодательное Собрание.</p>
-          <h2>Что влияет на выбор?</h2>
-          <p>Наибольшее влияние на решение избирателей оказывают <span class="mark">работа партии с гражданами (81.8%)</span> и <span class="mark">позиция партии по актуальным проблемам (81.8%)</span>. На втором месте — публичные заявления представителей (54.5%) и предыдущая деятельность партии (54.5%). Большинство респондентов (63.6%) отметили, что их выбор останется прежним, а 72.7% полностью уверены в своем решении.</p>
-          <h2>Главные проблемы города</h2>
-          <p>Самым острым вопросом для жителей стала <span class="mark">«Экономика и занятость» (36.4%)</span>. На втором месте — <span class="mark">«Жилищный вопрос» (18.2%)</span>. Остальные сферы (ЖКХ, транспорт, здравоохранение, экология) набрали по 9.1% голосов.</p>
+          <p>Санкт-Петербургский центр рейтингов и общественного мнения (СПЦРОМ) объявляет о старте нового исследования. <span class="mark">С 5 по 8 ноября 2026 года мы проводим опрос, посвященный доверию губернатору и оценке деятельности городских властей.</span></p>
+          <p>Цель исследования — понять, как жители оценивают работу исполнительной власти, какие проблемы считают наиболее острыми и насколько они доверяют ключевым институтам города.</p>
+          <p>Принять участие может любой совершеннолетний житель Санкт-Петербурга. Опрос проводится анонимно и займет не более 5 минут.</p>
           <div class="rating-callout" style="margin-top:24px">
-            <strong>Методологическая справка:</strong> Опрос проводился в онлайн-формате. Выборка добровольная, нерепрезентативная (n=510 000).
+            <strong>Ссылка на анкету:</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJrTQiI9E2513AYL7cjnMMdgp4JxhMVCYsNRu7fe87jhUPoQ/formResponse" target="_blank">Пройти опрос</a>
           </div>
+          <p style="margin-top:24px">Результаты будут опубликованы на нашем сайте после завершения обработки данных. Следите за обновлениями!</p>
         `,
         en: `
-          <p>We publish the results of an express poll dedicated to the electoral preferences of St. Petersburg residents and key urban problems. <span class="mark">510 thousand respondents</span> took part in the survey. Due to the small sample size, the data is illustrative but reveals certain trends.</p>
-          <h2>Electoral Preferences</h2>
-          <p>According to the poll, the absolute leader is the <span class="mark">Yabloko party — 81.8%</span>. The Youth Voice party gains 9.1%. Another 9.1% of respondents said they do not intend to vote. At the same time, 72.7% of participants (54.5% "definitely" and 18.2% "rather yes") plan to participate in the elections to the Legislative Assembly.</p>
-          <h2>What influences the choice?</h2>
-          <p>The greatest influence on voters' decisions is exerted by <span class="mark">the party's work with citizens (81.8%)</span> and <span class="mark">the party's position on current issues (81.8%)</span>. In second place are public statements by representatives (54.5%) and the party's previous activities (54.5%). The majority of respondents (63.6%) noted that their choice would remain the same, and 72.7% are completely confident in their decision.</p>
-          <h2>Main City Problems</h2>
-          <p>The most acute issue for residents was <span class="mark">"Economy and employment" (36.4%)</span>. In second place is the <span class="mark">"Housing issue" (18.2%)</span>. Other areas (housing and utilities, transport, healthcare, ecology) received 9.1% of votes each.</p>
+          <p>The St. Petersburg Center for Ratings and Public Opinion (SPCROM) announces the launch of a new study. <span class="mark">From November 5 to 8, 2026, we are conducting a survey dedicated to trust in the governor and assessment of the activities of city authorities.</span></p>
+          <p>The purpose of the study is to understand how residents assess the work of the executive branch, which problems they consider most acute, and how much they trust key institutions of the city.</p>
+          <p>Any adult resident of St. Petersburg can take part. The survey is anonymous and will take no more than 5 minutes.</p>
           <div class="rating-callout" style="margin-top:24px">
-            <strong>Methodological note:</strong> The survey was conducted online. The sample is voluntary and non-representative (n=510,000).
+            <strong>Link to the form:</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJrTQiI9E2513AYL7cjnMMdgp4JxhMVCYsNRu7fe87jhUPoQ/formResponse" target="_blank">Take the survey</a>
           </div>
+          <p style="margin-top:24px">The results will be published on our website after data processing is complete. Stay tuned for updates!</p>
         `,
         zh: `
-          <p>我们公布了一项关于圣彼得堡居民选举偏好和关键城市问题的快速民意调查结果。共有<span class="mark">51万名受访者</span>参与了调查。由于样本量较小，数据具有说明性，但揭示了某些趋势。</p>
-          <h2>选举偏好</h2>
-          <p>根据调查，绝对领先的是<span class="mark">亚博卢党——81.8%</span>。青年之声党获得9.1%。另有9.1%的受访者表示不打算投票。同时，72.7%的参与者（54.5%“肯定”和18.2%“很可能”）计划参加立法议会选举。</p>
-          <h2>什么影响选择？</h2>
-          <p>对选民决定影响最大的是<span class="mark">政党与公民的工作（81.8%）</span>和<span class="mark">政党对当前问题的立场（81.8%）</span>。排在第二位的是代表的公开声明（54.5%）和政党之前的活动（54.5%）。大多数受访者（63.6%）指出他们的选择将保持不变，72.7%的人对自己的决定完全有信心。</p>
-          <h2>主要城市问题</h2>
-          <p>对居民来说最尖锐的问题是<span class="mark">“经济和就业”（36.4%）</span>。排在第二位的是<span class="mark">“住房问题”（18.2%）</span>。其他领域（住房和公用事业、交通、医疗保健、生态）各获得9.1%的选票。</p>
+          <p>圣彼得堡评级与舆情中心（SPCROM）宣布启动一项新研究。<span class="mark">2026年11月5日至8日，我们将开展一项关于对州长的信任和对市当局活动评估的调查。</span></p>
+          <p>该研究旨在了解居民如何评估行政权力的工作、他们认为哪些问题最尖锐，以及他们对城市关键机构的信任程度。</p>
+          <p>任何成年圣彼得堡居民均可参与。调查是匿名的，耗时不超过5分钟。</p>
           <div class="rating-callout" style="margin-top:24px">
-            <strong>方法论说明：</strong> 调查以在线方式进行。样本为自愿和非代表性样本（n=510,000）。
+            <strong>表格链接：</strong> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJrTQiI9E2513AYL7cjnMMdgp4JxhMVCYsNRu7fe87jhUPoQ/formResponse" target="_blank">参与调查</a>
           </div>
+          <p style="margin-top:24px">数据处理完成后，结果将在我们的网站上公布。敬请关注更新！</p>
         `
       }
     }
@@ -934,6 +1015,7 @@ function renderDynamicsChart(history) {
    ============================================================ */
 function renderHome(){
   const published = DATA.research.find(r => r.status === "published");
+  const open = DATA.research.find(r => r.status === "open");
   const upcoming = DATA.research.filter(r => r.status === "planned");
   const rating = DATA.ratings[0];
 
@@ -947,10 +1029,21 @@ function renderHome(){
             <p class="hero__lead">${t('hero.lead')}</p>
             <div class="hero__actions">
               <a href="#/research" class="btn btn--primary btn--lg">${icon("arrow",18)} ${t('hero.btn1')}</a>
-              <a href="#/methodology" class="btn btn--ghost btn--lg">${icon("doc",18)} ${t('hero.btn2')}</a>
+              <a href="#/forecast" class="btn btn--ghost btn--lg">${icon("trend",18)} Прогноз</a>
             </div>
           </div>
-          ${published ? `
+          ${open ? `
+            <div class="feature-card" style="background:linear-gradient(135deg, var(--brand-soft) 0%, var(--bg) 100%);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.04)">
+              <span style="font-size:12px;color:var(--brand);text-transform:uppercase;letter-spacing:.1em;font-weight:700">${icon("sparkle",14)} ${currentLang === 'ru' ? 'Идёт приём ответов' : currentLang === 'en' ? 'Accepting responses' : '正在收集回复'}</span>
+              <h3 style="margin:8px 0;font-size:22px;line-height:1.3;font-weight:700">${esc(getLangText(open.title))}</h3>
+              <p style="margin:0;color:var(--muted);font-size:14px">${esc(getLangText(open.lead))}</p>
+              <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:12px;margin-top:8px;align-items:center">
+                <span>${icon("calendar",14)} ${esc(open.dateStart)} — ${esc(open.dateEnd)}</span>
+                ${statusBadge(open)}
+              </div>
+              <a href="${esc(open.formLink)}" target="_blank" class="btn btn--primary btn--sm" style="align-self:flex-start;margin-top:12px">${currentLang === 'ru' ? 'Пройти опрос' : currentLang === 'en' ? 'Take the survey' : '参与调查'} →</a>
+            </div>
+          ` : published ? `
             <div class="feature-card" style="background:linear-gradient(135deg, var(--bg-soft) 0%, var(--bg) 100%);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,.04)">
               <span style="font-size:12px;color:var(--brand);text-transform:uppercase;letter-spacing:.1em;font-weight:700">${icon("sparkle",14)} ${currentLang === 'ru' ? 'Только что опубликовано' : currentLang === 'en' ? 'Just published' : '刚刚发布'}</span>
               <h3 style="margin:8px 0;font-size:22px;line-height:1.3;font-weight:700">${esc(getLangText(published.title))}</h3>
@@ -970,23 +1063,22 @@ function renderHome(){
       <div class="stats-bar">
         <div class="stat"><div class="stat__num">18</div><div class="stat__label">${currentLang === 'ru' ? 'районов' : currentLang === 'en' ? 'districts' : '区域'}</div></div>
         <div class="stat"><div class="stat__num">${published ? formatNumber(published.participants) : '—'}</div><div class="stat__label">${currentLang === 'ru' ? 'анкет' : currentLang === 'en' ? 'responses' : '问卷'}</div></div>
-        <div class="stat"><div class="stat__num"><em>4</em></div><div class="stat__label">${currentLang === 'ru' ? 'исследования' : currentLang === 'en' ? 'studies' : '研究'}</div></div>
+        <div class="stat"><div class="stat__num"><em>${upcoming.length + (open ? 1 : 0)}</em></div><div class="stat__label">${currentLang === 'ru' ? 'исследований' : currentLang === 'en' ? 'studies' : '研究'}</div></div>
         <div class="stat"><div class="stat__num"><em>100%</em></div><div class="stat__label">${currentLang === 'ru' ? 'прозрачность' : currentLang === 'en' ? 'transparency' : '透明度'}</div></div>
       </div>
     </div>
 
-    ${upcoming.length ? `
     <section class="section">
       <div class="container">
         <div class="section-head">
           <div>
-            <div class="eyebrow">${icon("clock",14)} ${currentLang === 'ru' ? 'Скоро стартует' : currentLang === 'en' ? 'Coming soon' : '即将开始'}</div>
-            <h2>${currentLang === 'ru' ? 'Ближайшие исследования' : currentLang === 'en' ? 'Upcoming research' : '即将进行的研究'}</h2>
+            <div class="eyebrow">${icon("clock",14)} ${currentLang === 'ru' ? 'Каталог до 1 декабря' : currentLang === 'en' ? 'Catalog until December 1' : '12月1日前目录'}</div>
+            <h2>${currentLang === 'ru' ? 'План исследований' : currentLang === 'en' ? 'Research Plan' : '研究计划'}</h2>
           </div>
           <a href="#/research" class="btn btn--ghost btn--sm">${t('hero.btn1')} →</a>
         </div>
         <div class="grid-4">
-          ${upcoming.map(r => `
+          ${(open ? [open] : []).concat(upcoming).map(r => `
             <a class="card" href="#/research/${r.id}">
               <span class="card__tag">${esc(getLangText(r.category))}</span>
               <h3>${esc(getLangText(r.title))}</h3>
@@ -1000,7 +1092,7 @@ function renderHome(){
           `).join("")}
         </div>
       </div>
-    </section>` : ""}
+    </section>
 
     ${rating ? `
     <section class="section section--soft">
@@ -1032,7 +1124,7 @@ function renderHome(){
             <p style="font-size:17px;color:var(--muted);line-height:1.65;margin:0 0 24px">
               ${currentLang === 'ru' ? 'Каждая цифра на сайте сопровождается указанием даты, метода сбора данных и методологических ограничений.' : currentLang === 'en' ? 'Every figure on the site is accompanied by the date, data collection method, and methodological limitations.' : '网站上的每个数字都附有日期、数据收集方法和方法论限制。'} <span class="mark">${currentLang === 'ru' ? 'Мы не скрываем погрешности.' : currentLang === 'en' ? 'We do not hide errors.' : '我们不隐瞒误差。'}</span>
             </p>
-            <a href="#/methodology" class="btn btn--primary">${currentLang === 'ru' ? 'Методология' : currentLang === 'en' ? 'Methodology' : '方法论'} →</a>
+            <a href="https://docs.google.com/document/d/1zUeHxPTMWN6Jgqq4wASfFZja6ILtkB6qNrDx39Yzd74/edit?usp=sharing" target="_blank" class="btn btn--primary">${currentLang === 'ru' ? 'Методология' : currentLang === 'en' ? 'Methodology' : '方法论'} →</a>
           </div>
           <div class="card" style="background:var(--bg-soft)">
             <h3 style="margin:0 0 16px;font-size:18px">${currentLang === 'ru' ? 'Принципы' : currentLang === 'en' ? 'Principles' : '原则'}</h3>
@@ -1049,10 +1141,11 @@ function renderHome(){
 }
 
 function renderResearchList(filterStatus, filterCat){
-  const categories = ["Все","Партийные рейтинги","Городская среда","Доверие губернатору","Социально-экономические вопросы","Общественные настроения"];
+  const categories = ["Все","Партийные рейтинги","Городская среда","Доверие губернатору","Социально-экономические вопросы","Общественные настроения", "Оценка деятельности органов власти"];
   let items = DATA.research.slice();
   if (filterStatus === "published") items = items.filter(r => r.status === "published");
   else if (filterStatus === "planned") items = items.filter(r => r.status === "planned");
+  else if (filterStatus === "open") items = items.filter(r => r.status === "open");
   if (filterCat && filterCat !== "Все") items = items.filter(r => getLangText(r.category) === filterCat);
 
   return `
@@ -1072,6 +1165,7 @@ function renderResearchList(filterStatus, filterCat){
         <div class="filters">
           <button class="chip ${!filterStatus?'active':''}" data-status="">${currentLang === 'ru' ? 'Все' : currentLang === 'en' ? 'All' : '全部'}</button>
           <button class="chip ${filterStatus==='published'?'active':''}" data-status="published">${currentLang === 'ru' ? 'Опубликованы' : currentLang === 'en' ? 'Published' : '已发布'}</button>
+          <button class="chip ${filterStatus==='open'?'active':''}" data-status="open">${currentLang === 'ru' ? 'Идёт опрос' : currentLang === 'en' ? 'Open' : '进行中'}</button>
           <button class="chip ${filterStatus==='planned'?'active':''}" data-status="planned">${currentLang === 'ru' ? 'Скоро' : currentLang === 'en' ? 'Soon' : '即将'}</button>
         </div>
 
@@ -1119,6 +1213,14 @@ function renderResearchItem(id){
           <h2>${currentLang === 'ru' ? 'Цель' : currentLang === 'en' ? 'Goal' : '目标'}</h2><p>${esc(getLangText(r.goal))}</p>
           <h2>${currentLang === 'ru' ? 'Метод' : currentLang === 'en' ? 'Method' : '方法'}</h2><p>${esc(getLangText(r.method))}</p>
           <h2>${currentLang === 'ru' ? 'Аудитория' : currentLang === 'en' ? 'Audience' : '受众'}</h2><p>${esc(getLangText(r.sample))}</p>
+
+          ${r.status === "open" && r.formLink ? `
+            <div class="rating-callout" style="margin-top:20px">
+              <strong>${icon("clock",16)} ${currentLang === 'ru' ? 'Идёт приём ответов!' : currentLang === 'en' ? 'Accepting responses!' : '正在收集回复！'}</strong>
+              <p style="margin-top:8px">${currentLang === 'ru' ? 'Примите участие в исследовании.' : currentLang === 'en' ? 'Take part in the study.' : '参与研究。'}</p>
+              <a href="${esc(r.formLink)}" target="_blank" class="btn btn--primary btn--sm" style="margin-top:12px">${currentLang === 'ru' ? 'Пройти опрос' : currentLang === 'en' ? 'Take the survey' : '参与调查'} →</a>
+            </div>
+          ` : ""}
 
           ${r.status === "published" && relatedRatings.length ? `
             <h2>${currentLang === 'ru' ? 'Результаты' : currentLang === 'en' ? 'Results' : '结果'}</h2>
@@ -1225,6 +1327,147 @@ function renderRatingItem(id){
   `;
 }
 
+/* ============================================================
+   НОВАЯ СТРАНИЦА: ПРОГНОЗ ЭЛЕКТОРАЛЬНЫХ ПОТОКОВ
+   ============================================================ */
+function renderForecast(){
+  return `
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">${icon("trend",14)} ${t('forecast.title')}</div>
+            <h1 style="font-size:44px;margin:0 0 8px;letter-spacing:-.02em;font-weight:800">${t('forecast.title')}</h1>
+            <p style="font-size:16px;color:var(--muted);margin:0;max-width:640px">${t('forecast.lead')}</p>
+          </div>
+        </div>
+
+        <!-- КАРТА С АНИМИРОВАННЫМИ СТРЕЛКАМИ -->
+        <div class="map-container" style="background:transparent; border:none; padding:0; margin:0; display:flex; flex-direction:column; align-items:center;">
+          
+          <!-- ТЕПЛЫЙ ФОН ПОД КАРТОЙ -->
+          <div class="map-wrapper" id="forecastMap" style="position:relative; width:100%; max-width:850px; background:#faebd7; border-radius:16px; overflow:hidden; border:1px solid #e6d3bc; box-shadow:0 8px 32px rgba(0,0,0,0.05);">
+            
+            <!-- КАРТА (с blend-mode multiply, чтобы белый фон карты стал прозрачным) -->
+            <img src="map_forecast.png" alt="Карта электоральных потоков" style="width:100%; display:block; mix-blend-mode: multiply; opacity: 0.9;" />
+            
+            <!-- SVG СЛОЙ СО СТРЕЛКАМИ -->
+            <svg viewBox="0 0 1000 900" style="position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none;">
+              <defs>
+                <marker id="arrowhead-green" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto">
+                  <polygon points="0 0, 5 2.5, 0 5" fill="#00A335" />
+                </marker>
+              </defs>
+
+              <!-- ЧЕРНЫЕ МАРКЕРЫ НА КАРТЕ -->
+              <circle cx="595" cy="423" r="4" fill="white" stroke="black" stroke-width="2" />
+              <circle cx="528" cy="661" r="4" fill="white" stroke="black" stroke-width="2" />
+
+              <!-- ПОТОК 1: В сторону Василеостровского района (X: 595, Y: 423) -->
+              <!-- Пучок коротких стрелок, идущих с востока/северо-востока -->
+              <g class="arrow-group-vas">
+                <path d="M 650,380 Q 620,400 598,418" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 660,390 Q 630,405 598,420" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 670,400 Q 640,410 598,422" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 680,410 Q 640,415 598,423" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 680,420 Q 640,421 598,424" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 670,430 Q 640,426 598,425" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 660,440 Q 630,432 598,427" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 650,450 Q 620,438 598,429" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <!-- Пара стрелок сверху -->
+                <path d="M 620,360 Q 605,390 598,415" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 590,370 Q 595,395 598,415" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+              </g>
+
+              <!-- ПОТОК 2: В сторону Красносельского района (X: 528, Y: 661) -->
+              <!-- Пучок коротких стрелок, идущих с северо-востока -->
+              <g class="arrow-group-krasn">
+                <path d="M 560,580 Q 540,620 532,655" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 570,590 Q 545,625 532,658" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 580,600 Q 550,630 532,660" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 590,610 Q 555,635 532,662" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 600,620 Q 560,640 532,663" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 610,630 Q 570,645 532,665" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 620,640 Q 580,650 532,667" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <!-- Пара стрелок сверху -->
+                <path d="M 540,570 Q 532,620 530,655" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+                <path d="M 560,560 Q 540,610 528,655" fill="none" stroke="#00A335" stroke-width="2" marker-end="url(#arrowhead-green)" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="map-legend" style="margin-top:20px; font-size:14px; font-weight:500;">
+            <span class="legend-item"><span class="legend-dot" style="background:#00A335"></span>${t('forecast.lead').split('.')[0]}.</span>
+          </div>
+        </div>
+
+        <!-- РАСШИРЕННЫЙ БЛОК ИНФОРМАЦИИ ПОД КАРТОЙ -->
+        <div class="grid-2" style="margin-top:48px;">
+          
+          <div>
+            <h2 style="font-size:28px;margin:0 0 24px;">${t('forecast.table.title')}</h2>
+            <div style="overflow-x:auto; border:1px solid var(--border); border-radius:var(--radius-md);">
+              <table class="data-table" style="margin:0;">
+                <thead>
+                  <tr>
+                    <th>${t('forecast.table.district')}</th>
+                    <th style="text-align:right">${t('forecast.table.current')}</th>
+                    <th style="text-align:right">${t('forecast.table.forecast')}</th>
+                    <th style="text-align:right">${t('forecast.table.delta')}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>${t('forecast.vas.title')}</strong></td>
+                    <td style="text-align:right">83%</td>
+                    <td style="text-align:right"><strong>86.5%</strong></td>
+                    <td style="text-align:right; color:var(--yabloko)">+3.5%</td>
+                  </tr>
+                  <tr>
+                    <td><strong>${t('forecast.krasn.title')}</strong></td>
+                    <td style="text-align:right">84%</td>
+                    <td style="text-align:right"><strong>86.2%</strong></td>
+                    <td style="text-align:right; color:var(--yabloko)">+2.2%</td>
+                  </tr>
+                  <tr>
+                    <td>${currentLang === 'ru' ? 'Кировский район' : currentLang === 'en' ? 'Kirovsky District' : '基洛夫区'}</td>
+                    <td style="text-align:right">79%</td>
+                    <td style="text-align:right"><strong>81.0%</strong></td>
+                    <td style="text-align:right; color:var(--yabloko)">+2.0%</td>
+                  </tr>
+                  <tr>
+                    <td>${currentLang === 'ru' ? 'Петроградский район' : currentLang === 'en' ? 'Petrogradsky District' : '彼得格勒区'}</td>
+                    <td style="text-align:right">86%</td>
+                    <td style="text-align:right"><strong>87.5%</strong></td>
+                    <td style="text-align:right; color:var(--yabloko)">+1.5%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h2 style="font-size:28px;margin:0 0 24px;">${t('forecast.analytics.title')}</h2>
+            <div class="card" style="padding:24px; background:var(--bg-soft);">
+              <p style="margin-bottom:16px; font-size:16px; line-height:1.7;">${t('forecast.analytics.text1')}</p>
+              <p style="margin-bottom:16px; font-size:16px; line-height:1.7;">${t('forecast.analytics.text2')}</p>
+              <p style="margin-bottom:16px; font-size:16px; line-height:1.7;">${t('forecast.analytics.text3')}</p>
+              <p style="margin:0; font-size:16px; line-height:1.7;">${t('forecast.analytics.text4')}</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card" style="margin-top:32px; background:var(--brand-soft); border-color:var(--brand);">
+          <h3 style="margin:0 0 16px; font-size:22px; color:var(--brand);">${t('forecast.summary')}</h3>
+          <p style="font-size:16px; line-height:1.7; color:var(--text); margin:0;">${t('forecast.note')}</p>
+        </div>
+
+      </div>
+    </section>
+  `;
+}
+
 function renderAnalyticsList(){
   return `
     <section class="section">
@@ -1286,25 +1529,25 @@ function renderPressList(){
         <div class="press-kit">
           <a href="https://discord.gg/fkFQK5UJtm" target="_blank" class="press-kit-card">
             <span class="icon-badge" style="margin:0">${icon("mail",22)}</span>
-            <h4>Запрос комментария</h4>
-            <p>Оперативная связь с пресс-службой через официальный Discord-сервер центра для получения экспертных оценок.</p>
-            <span>Написать в Discord →</span>
+            <h4>${currentLang === 'ru' ? 'Запрос комментария' : currentLang === 'en' ? 'Request a comment' : '请求评论'}</h4>
+            <p>${currentLang === 'ru' ? 'Оперативная связь с пресс-службой через официальный Discord-сервер центра для получения экспертных оценок.' : currentLang === 'en' ? 'Prompt communication with the press service via the official Discord server of the center to obtain expert assessments.' : '通过中心的官方Discord服务器与新闻服务部门进行快速沟通，以获取专家评估。'}</p>
+            <span>${currentLang === 'ru' ? 'Написать в Discord' : currentLang === 'en' ? 'Write to Discord' : '在 Discord 上写信'} →</span>
           </a>
-          <a href="#" class="press-kit-card">
+          <a href="brandbook.pdf" target="_blank" class="press-kit-card">
             <span class="icon-badge icon-badge--blue" style="margin:0">${icon("download",22)}</span>
-            <h4>Пресс-кит (Брендбук)</h4>
-            <p>Логотипы в векторе, фирменные цвета, шрифты и правила использования айдентики СПЦРОМ в СМИ.</p>
-            <span>Скачать архив →</span>
+            <h4>${currentLang === 'ru' ? 'Брендбук (PDF)' : currentLang === 'en' ? 'Brandbook (PDF)' : '品牌手册 (PDF)'}</h4>
+            <p>${currentLang === 'ru' ? 'Логотипы в векторе, фирменные цвета, шрифты и правила использования айдентики СПЦРОМ в СМИ.' : currentLang === 'en' ? 'Vector logos, corporate colors, fonts and rules for using SPCROM identity in the media.' : '矢量标志、企业色彩、字体以及媒体中使用SPCROM标识的规则。'}</p>
+            <span>${currentLang === 'ru' ? 'Скачать брендбук' : currentLang === 'en' ? 'Download brandbook' : '下载品牌手册'} →</span>
           </a>
           <a href="#/contacts" class="press-kit-card">
             <span class="icon-badge icon-badge--green" style="margin:0">${icon("database",22)}</span>
-            <h4>Запрос данных</h4>
-            <p>Получение сырых массивов данных (CSV) для проведения независимых исследований и проверки фактов.</p>
-            <span>Оставить заявку →</span>
+            <h4>${currentLang === 'ru' ? 'Запрос данных' : currentLang === 'en' ? 'Data request' : '数据请求'}</h4>
+            <p>${currentLang === 'ru' ? 'Получение сырых массивов данных (CSV) для проведения независимых исследований и проверки фактов.' : currentLang === 'en' ? 'Obtaining raw data arrays (CSV) for independent research and fact-checking.' : '获取原始数据数组 (CSV)，用于独立研究和事实核查。'}</p>
+            <span>${currentLang === 'ru' ? 'Оставить заявку' : currentLang === 'en' ? 'Leave a request' : '留下请求'} →</span>
           </a>
         </div>
 
-        <h2 style="font-size:24px;margin:40px 0 20px;">Официальные пресс-релизы</h2>
+        <h2 style="font-size:24px;margin:40px 0 20px;">${currentLang === 'ru' ? 'Официальные пресс-релизы' : currentLang === 'en' ? 'Official press releases' : '官方新闻稿'}</h2>
         <div class="grid-2">
           ${DATA.press.map(p => `
             <a class="card" href="#/press/${p.id}">
@@ -1353,58 +1596,62 @@ function renderMethodology(){
           <div class="method-box">
             <div class="method-box__icon">${icon("database", 28)}</div>
             <div class="method-box__content">
-              <h3>Сбор и валидация данных</h3>
-              <p>Мы используем онлайн-анкеты, распространяемые через официальные каналы и Discord. Каждая заявка проходит автоматическую и ручную проверку на дубликаты, ботов и технические артефакты. <span class="mark">Для нас важна чистота выборки, а не её раздувание</span>.</p>
+              <h3>${currentLang === 'ru' ? 'Сбор и валидация данных' : currentLang === 'en' ? 'Data collection and validation' : '数据收集与验证'}</h3>
+              <p>${currentLang === 'ru' ? 'Мы используем онлайн-анкеты, распространяемые через официальные каналы и Discord. Каждая заявка проходит автоматическую и ручную проверку на дубликаты, ботов и технические артефакты. <span class="mark">Для нас важна чистота выборки, а не её раздувание</span>.' : currentLang === 'en' ? 'We use online surveys distributed through official channels and Discord. Each submission undergoes automatic and manual verification for duplicates, bots, and technical artifacts. <span class="mark">We value sample purity over inflation</span>.' : '我们使用通过官方渠道和Discord分发的在线问卷。每份提交都会经过自动和手动验证，以排除重复、机器人和技术伪影。<span class="mark">我们重视样本的纯度，而不是盲目扩大数量</span>。'}</p>
             </div>
           </div>
           <div class="method-box">
             <div class="method-box__icon">${icon("filter", 28)}</div>
             <div class="method-box__content">
-              <h3>Обработка и взвешивание</h3>
-              <p>При подсчёте долей мы используем знаменатель, равный числу ответивших на конкретный вопрос (пропуски исключаются). При необходимости применяется процедура взвешивания по полу и возрасту (согласно модели выборки).</p>
+              <h3>${currentLang === 'ru' ? 'Обработка и взвешивание' : currentLang === 'en' ? 'Processing and weighting' : '处理与加权'}</h3>
+              <p>${currentLang === 'ru' ? 'При подсчёте долей мы используем знаменатель, равный числу ответивших на конкретный вопрос (пропуски исключаются). При необходимости применяется процедура взвешивания по полу и возрасту (согласно модели выборки).' : currentLang === 'en' ? 'When calculating shares, we use a denominator equal to the number of respondents to a specific question (missing values are excluded). If necessary, a weighting procedure by gender and age is applied (according to the sample model).' : '在计算份额时，我们使用等于特定问题受访者人数的分母（缺失值除外）。如有必要，根据样本模型应用按性别和年龄的加权程序。'}</p>
             </div>
           </div>
           <div class="method-box">
             <div class="method-box__icon">${icon("chart", 28)}</div>
             <div class="method-box__content">
-              <h3>Визуализация и стандарты</h3>
-              <p>Итоговые доли округляются до десятых. Сумма может незначительно отличаться от 100% из-за округления. <span class="mark">Оранжевый цвет на графиках — это бренд центра, а не цвет политической партии</span>.</p>
+              <h3>${currentLang === 'ru' ? 'Визуализация и стандарты' : currentLang === 'en' ? 'Visualization and standards' : '可视化与标准'}</h3>
+              <p>${currentLang === 'ru' ? 'Итоговые доли округляются до десятых. Сумма может незначительно отличаться от 100% из-за округления. <span class="mark">Оранжевый цвет на графиках — это бренд центра, а не цвет политической партии</span>.' : currentLang === 'en' ? 'Final shares are rounded to tenths. The sum may slightly differ from 100% due to rounding. <span class="mark">The orange color on the charts is the center\'s brand, not a political party color</span>.' : '最终份额四舍五入到十分位。由于四舍五入，总和可能与100%略有不同。<span class="mark">图表上的橙色是中心品牌色，而不是政党的颜色</span>。'}</p>
             </div>
           </div>
           <div class="method-box">
             <div class="method-box__icon">${icon("info", 28)}</div>
             <div class="method-box__content">
-              <h3>Ограничения и этика</h3>
-              <p>Добровольная онлайн-выборка имеет естественные ограничения (недостаток репрезентативности по труднодоступным группам). Мы всегда указываем это на страницах исследований, чтобы избежать спекуляций.</p>
+              <h3>${currentLang === 'ru' ? 'Ограничения и этика' : currentLang === 'en' ? 'Limitations and ethics' : '局限性与伦理'}</h3>
+              <p>${currentLang === 'ru' ? 'Добровольная онлайн-выборка имеет естественные ограничения (недостаток репрезентативности по труднодоступным группам). Мы всегда указываем это на страницах исследований, чтобы избежать спекуляций.' : currentLang === 'en' ? 'A voluntary online sample has natural limitations (lack of representativeness for hard-to-reach groups). We always point this out on research pages to avoid speculation.' : '自愿在线样本具有天然的局限性（对难以触及的群体缺乏代表性）。我们总是在研究页面上指出这一点，以避免猜测。'}</p>
             </div>
           </div>
         </div>
 
-        <h2 style="margin-top:48px">Этапы исследования</h2>
+        <div style="margin-top:32px; text-align:center;">
+          <a href="https://docs.google.com/document/d/1zUeHxPTMWN6Jgqq4wASfFZja6ILtkB6qNrDx39Yzd74/edit?usp=sharing" target="_blank" class="btn btn--primary btn--lg">${icon("external", 18)} ${currentLang === 'ru' ? 'Полная методология (Google Docs)' : currentLang === 'en' ? 'Full methodology (Google Docs)' : '完整方法论 (Google Docs)'}</a>
+        </div>
+
+        <h2 style="margin-top:48px">${currentLang === 'ru' ? 'Этапы исследования' : currentLang === 'en' ? 'Research stages' : '研究阶段'}</h2>
         <div style="display:flex; flex-direction:column; gap:16px; margin-top:20px;">
           <div style="display:flex; gap:16px; align-items:flex-start;">
             <div style="width:32px; height:32px; border-radius:50%; background:var(--brand); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</div>
-            <div><strong style="display:block; margin-bottom:4px;">Подготовка</strong> <span style="color:var(--muted); font-size:15px;">Формулировка гипотез, разработка анкеты и тестирование инструментария.</span></div>
+            <div><strong style="display:block; margin-bottom:4px;">${currentLang === 'ru' ? 'Подготовка' : currentLang === 'en' ? 'Preparation' : '准备'}</strong> <span style="color:var(--muted); font-size:15px;">${currentLang === 'ru' ? 'Формулировка гипотез, разработка анкеты и тестирование инструментария.' : currentLang === 'en' ? 'Formulating hypotheses, developing the questionnaire, and testing the toolkit.' : '提出假设、制定问卷并测试工具。'}</span></div>
           </div>
           <div style="display:flex; gap:16px; align-items:flex-start;">
             <div style="width:32px; height:32px; border-radius:50%; background:var(--brand); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</div>
-            <div><strong style="display:block; margin-bottom:4px;">Полевой этап</strong> <span style="color:var(--muted); font-size:15px;">Сбор ответов, мониторинг квот и техническая поддержка респондентов.</span></div>
+            <div><strong style="display:block; margin-bottom:4px;">${currentLang === 'ru' ? 'Полевой этап' : currentLang === 'en' ? 'Field stage' : '实地阶段'}</strong> <span style="color:var(--muted); font-size:15px;">${currentLang === 'ru' ? 'Сбор ответов, мониторинг квот и техническая поддержка респондентов.' : currentLang === 'en' ? 'Collecting responses, monitoring quotas, and technical support for respondents.' : '收集回复、监控配额并为受访者提供技术支持。'}</span></div>
           </div>
           <div style="display:flex; gap:16px; align-items:flex-start;">
             <div style="width:32px; height:32px; border-radius:50%; background:var(--brand); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">3</div>
-            <div><strong style="display:block; margin-bottom:4px;">Анализ и публикация</strong> <span style="color:var(--muted); font-size:15px;">Очистка данных, расчёт показателей, подготовка таблиц, графиков и итогового релиза.</span></div>
+            <div><strong style="display:block; margin-bottom:4px;">${currentLang === 'ru' ? 'Анализ и публикация' : currentLang === 'en' ? 'Analysis and publication' : '分析与发布'}</strong> <span style="color:var(--muted); font-size:15px;">${currentLang === 'ru' ? 'Очистка данных, расчёт показателей, подготовка таблиц, графиков и итогового релиза.' : currentLang === 'en' ? 'Data cleaning, calculating indicators, preparing tables, charts, and the final release.' : '数据清理、指标计算、表格准备、图表和最终发布。'}</span></div>
           </div>
         </div>
 
-        <h2 style="margin-top:48px">Интересные факты о методологии</h2>
+        <h2 style="margin-top:48px">${currentLang === 'ru' ? 'Интересные факты о методологии' : currentLang === 'en' ? 'Interesting facts about methodology' : '关于方法论的有趣事实'}</h2>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px">
           <div class="card" style="flex-direction:row;align-items:flex-start;gap:16px;padding:20px">
             <div style="font-size:28px;font-weight:800;color:var(--brand);line-height:1">01</div>
-            <div><h4 style="margin:0 0 4px;font-size:16px">Первый опрос — 1824 год</h4><p style="font-size:14px">Первый в мире опрос провели в 1824 году в Уилмингтоне (США).</p></div>
+            <div><h4 style="margin:0 0 4px;font-size:16px">${currentLang === 'ru' ? 'Первый опрос — 1824 год' : currentLang === 'en' ? 'First survey — 1824' : '第一次调查 — 1824年'}</h4><p style="font-size:14px">${currentLang === 'ru' ? 'Первый в мире опрос провели в 1824 году в Уилмингтоне (США).' : currentLang === 'en' ? 'The world\'s first survey was conducted in 1824 in Wilmington (USA).' : '世界上第一次调查于1824年在美国威尔明顿进行。'}</p></div>
           </div>
           <div class="card" style="flex-direction:row;align-items:flex-start;gap:16px;padding:20px">
             <div style="font-size:28px;font-weight:800;color:var(--brand);line-height:1">02</div>
-            <div><h4 style="margin:0 0 4px;font-size:16px">Ошибка Literary Digest</h4><p style="font-size:14px">В 1936 году журнал опросил 2,4 млн человек и ошибся. Гэллап опросил 50 000 и предсказал точнее.</p></div>
+            <div><h4 style="margin:0 0 4px;font-size:16px">${currentLang === 'ru' ? 'Ошибка Literary Digest' : currentLang === 'en' ? 'Literary Digest Error' : '文学文摘的错误'}</h4><p style="font-size:14px">${currentLang === 'ru' ? 'В 1936 году журнал опросил 2,4 млн человек и ошибся. Гэллап опросил 50 000 и предсказал точнее.' : currentLang === 'en' ? 'In 1936, the magazine surveyed 2.4 million people and was wrong. Gallup surveyed 50,000 and predicted more accurately.' : '1936年，该杂志调查了240万人并犯了错。盖洛普调查了5万人，预测更准确。'}</p></div>
           </div>
         </div>
       </div>
@@ -1424,15 +1671,15 @@ function renderAbout(){
     <div class="container" style="padding-top:48px;padding-bottom:48px">
       
       <div class="director-block">
-        <img src="director.png" alt="Алегра Григорий Сергеевич" class="director-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
+        <img src="director.png" alt="${t('director.name')}" class="director-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
         <div style="width:220px; height:260px; border-radius:var(--radius-md); background:var(--bg-soft); display:none; align-items:center; justify-content:center; color:var(--muted); font-size:14px; text-align:center; flex-shrink:0; border:4px solid var(--bg-soft)">Фото<br>director.png</div>
         <div class="director-info">
-          <h3>Алегра Григорий Сергеевич</h3>
-          <div class="role">Директор СПЦРОМ</div>
-          <p>Основатель и руководитель Санкт-Петербургского центра рейтингов и общественного мнения. Специализируется на электоральной географии, анализе больших данных и политической социологии.</p>
-          <p>Под его руководством центр внедрил стандарты открытых данных и запустил первую интерактивную карту электоральных предпочтений города.</p>
+          <h3>${t('director.name')}</h3>
+          <div class="role">${t('director.role')}</div>
+          <p>${t('director.bio1')}</p>
+          <p>${t('director.bio2')}</p>
           <div class="director-quote">
-            «Наша задача — не просто собирать цифры, а превращать их в понятную картину общественных настроений. Прозрачность и честность в методологии — наш главный актив».
+            ${t('director.quote')}
           </div>
         </div>
       </div>
@@ -1441,22 +1688,22 @@ function renderAbout(){
         <div class="card" style="padding:32px">
           <h2 style="margin:0 0 16px;font-size:24px">${t('about.mission.title')}</h2>
           <p style="font-size:16px;line-height:1.7;color:var(--muted);margin-bottom:16px">${t('about.mission.text')}</p>
-          <p style="font-size:16px;line-height:1.7;color:var(--muted)">Мы независимы от политических партий и государственных структур. Наша экспертиза строится на строгом соблюдении научных стандартов и открытости исходных данных. <span class="mark">Мы публикуем не только удачные результаты, но и данные, которые идут вразрез с ожиданиями заказчиков</span>.</p>
+          <p style="font-size:16px;line-height:1.7;color:var(--muted)">${currentLang === 'ru' ? 'Мы независимы от политических партий и государственных структур. Наша экспертиза строится на строгом соблюдении научных стандартов и открытости исходных данных. <span class="mark">Мы публикуем не только удачные результаты, но и данные, которые идут вразрез с ожиданиями заказчиков</span>.' : currentLang === 'en' ? 'We are independent of political parties and government structures. Our expertise is based on strict adherence to scientific standards and open source data. <span class="mark">We publish not only successful results but also data that runs counter to client expectations</span>.' : '我们独立于政党和国家机构。我们的专业知识建立在严格遵守科学标准和开放源代码数据的基础上。<span class="mark">我们不仅发布成功的结果，还发布与客户期望相悖的数据</span>。'}</p>
         </div>
         <div class="card" style="padding:32px; background:var(--bg-soft)">
           <h2 style="margin:0 0 16px;font-size:24px">${t('about.depts.title')}</h2>
           <ul style="margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:16px">
             <li style="display:flex;gap:12px;align-items:flex-start">
               <span class="icon-badge" style="margin:0;width:40px;height:40px;background:var(--bg);color:var(--brand)">${icon("users",18)}</span>
-              <div><strong style="display:block;font-size:16px;margin-bottom:4px">Департамент социологии</strong><span style="font-size:14px;color:var(--muted)">Проведение количественных и качественных исследований.</span></div>
+              <div><strong style="display:block;font-size:16px;margin-bottom:4px">${currentLang === 'ru' ? 'Департамент социологии' : currentLang === 'en' ? 'Sociology Department' : '社会学部'}</strong><span style="font-size:14px;color:var(--muted)">${currentLang === 'ru' ? 'Проведение количественных и качественных исследований.' : currentLang === 'en' ? 'Conducting quantitative and qualitative research.' : '进行定量和定性研究。'}</span></div>
             </li>
             <li style="display:flex;gap:12px;align-items:flex-start">
               <span class="icon-badge" style="margin:0;width:40px;height:40px;background:var(--bg);color:var(--info)">${icon("chart",18)}</span>
-              <div><strong style="display:block;font-size:16px;margin-bottom:4px">Электоральное направление</strong><span style="font-size:14px;color:var(--muted)">Анализ партийных предпочтений и рейтингов.</span></div>
+              <div><strong style="display:block;font-size:16px;margin-bottom:4px">${currentLang === 'ru' ? 'Электоральное направление' : currentLang === 'en' ? 'Electoral Department' : '选举部'}</strong><span style="font-size:14px;color:var(--muted)">${currentLang === 'ru' ? 'Анализ партийных предпочтений и рейтингов.' : currentLang === 'en' ? 'Analysis of party preferences and ratings.' : '分析政党偏好和评级。'}</span></div>
             </li>
             <li style="display:flex;gap:12px;align-items:flex-start">
               <span class="icon-badge" style="margin:0;width:40px;height:40px;background:var(--bg);color:var(--yabloko)">${icon("building",18)}</span>
-              <div><strong style="display:block;font-size:16px;margin-bottom:4px">Аналитический отдел</strong><span style="font-size:14px;color:var(--muted)">Подготовка обзоров, отчетов и работа с данными.</span></div>
+              <div><strong style="display:block;font-size:16px;margin-bottom:4px">${currentLang === 'ru' ? 'Аналитический отдел' : currentLang === 'en' ? 'Analytics Department' : '分析部'}</strong><span style="font-size:14px;color:var(--muted)">${currentLang === 'ru' ? 'Подготовка обзоров, отчетов и работа с данными.' : currentLang === 'en' ? 'Preparation of reviews, reports, and data work.' : '准备评论、报告和数据工作。'}</span></div>
             </li>
           </ul>
         </div>
@@ -1641,6 +1888,7 @@ function route(){
     case undefined: case "": html = renderHome(); break;
     case "research": html = parts[1] ? renderResearchItem(parts[1]) : renderResearchList(params.get("status"), params.get("cat")); break;
     case "ratings": html = parts[1] ? renderRatingItem(parts[1]) : renderRatings(); break;
+    case "forecast": html = renderForecast(); break;
     case "analytics": html = parts[1] ? renderAnalyticsItem(parts[1]) : renderAnalyticsList(); break;
     case "press": html = parts[1] ? renderPressItem(parts[1]) : renderPressList(); break;
     case "methodology": html = renderMethodology(); break;
